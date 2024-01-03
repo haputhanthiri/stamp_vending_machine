@@ -1,0 +1,149 @@
+#include <stdio.h>
+
+void main() {
+    int stamps_25 = 10, stamps_15 = 10, stamps_10 = 10;
+    int coins_50 = 10, coins_25 = 10, coins_10 = 10, coins_5 = 10;
+
+    while (1) {
+        int amount_tendered, stamp_requested;
+        printf("\nEnter amount tendered: ");
+        scanf("%d", &amount_tendered);
+        printf("Enter stamp requested (25, 15, or 10): ");
+        scanf("%d", &stamp_requested);
+
+        if(stamp_requested != 25 && stamp_requested != 15 && stamp_requested != 10 && amount_tendered!=50 && amount_tendered!=25 && amount_tendered!=10 && amount_tendered!=5)
+        {
+            printf("Invalid stamp requested and Invalid amount tendered\n");
+            continue;
+        }
+
+        if (stamp_requested != 25 && stamp_requested != 15 && stamp_requested != 10)
+            {
+            printf("Invalid stamp requested\n");
+            continue;
+            }
+
+        if(amount_tendered!=50 && amount_tendered!=25 && amount_tendered!=10 && amount_tendered!=5)
+        {
+            printf("Invalid amount tendered\n");
+            continue;
+        }
+
+
+        if (amount_tendered < stamp_requested) {
+            printf("Insufficient amount tendered.\n");
+            continue;
+        }
+
+        if (stamp_requested == 25 && stamps_25 == 0)
+            {
+            printf("No 25-rupee stamp available.\n");
+            continue;
+            }
+        else if (stamp_requested == 15 && stamps_15 == 0)
+            {
+            printf("No 15-rupee stamp available.\n");
+            continue;
+            }
+        else if (stamp_requested == 10 && stamps_10 == 0)
+            {
+            printf("No 10-rupee stamp available.\n");
+            continue;
+            }
+
+
+
+        int change = amount_tendered - stamp_requested;
+
+        int coins_50_returned = 0;
+
+        int coins_25_returned = 0;
+
+        int coins_10_returned = 0;
+
+        int coins_5_returned = 0;
+
+
+                    if(amount_tendered==50)
+                    {
+                        ++coins_50;
+                    }
+                    else if(amount_tendered==25)
+                    {
+                       ++coins_25;
+                    }
+                    else if(amount_tendered==10)
+                    {
+                        ++coins_10;
+                    }
+                    else if(amount_tendered==5)
+                    {
+                        ++coins_5;
+                    }
+
+        printf("Stamp dispensed: %d-rupee stamp\n", stamp_requested);
+        printf("Remaining balnace is RS.%d\n",change);
+
+        while (change > 0) {
+            if (change >= 50 && coins_50 > 0) {
+                change =change-50;
+                coins_50--;
+                coins_50_returned++;
+            } else if (change >= 25 && coins_25 > 0) {
+                change =change-25;
+                coins_25--;
+                coins_25_returned++;
+            } else if (change >= 10 && coins_10 > 0) {
+                change -= 10;
+                coins_10--;
+                coins_10_returned++;
+            } else if (change >= 5 && coins_5 > 0) {
+                change -= 5;
+                coins_5--;
+                coins_5_returned++;
+            } else {
+                printf("No change available.\n");
+                coins_50 =coins_50+coins_50_returned;
+                coins_25 =coins_25+coins_25_returned;
+                coins_10 =coins_10+coins_10_returned;
+                coins_5 =coins_5+coins_5_returned;
+
+
+            }
+        }
+
+
+        if (change == 0) {
+            if (stamp_requested == 25) {
+                stamps_25--;
+            } else if (stamp_requested == 15) {
+                stamps_15--;
+            } else if (stamp_requested == 10) {
+                stamps_10--;
+            }
+        }
+
+
+            printf("\nCoins returned:\n       50-rupee coins:%d\n       25-rupee coins:%d\n       10-rupee coins:%d\n        5-rupee coins:%d\n", coins_50_returned, coins_25_returned, coins_10_returned, coins_5_returned);
+
+       printf("\nAvailable stamps:\n        25-rupee stamps:%d\n        15-rupee stamps:%d\n        10-rupee stamps:%d\n", stamps_25, stamps_15, stamps_10);
+
+        printf("Available coins:\n        50-rupee coins:%d\n        25-rupee coins:%d\n        10-rupee coins:%d\n        5-rupee coins :%d\n", coins_50, coins_25, coins_10, coins_5);
+
+        int k;
+        printf("\nDo you want to continue? (1 for yes, 0 for no): ");
+        scanf("%d", &k);
+        if (k == 0) {
+                printf("\nThank you for using the stamp vending machine.");
+
+
+        }
+         //printf("\nThank you for using the stamp vending machine.");
+
+
+
+}
+return 0;
+}
+
+
